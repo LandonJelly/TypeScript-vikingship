@@ -1,7 +1,7 @@
 /*
  * @Description: This file is made for
  * @Date: 2021-02-12 10:55:23
- * @LastEditTime: 2021-02-14 18:03:43
+ * @LastEditTime: 2021-02-15 20:46:26
  * @Author: LeongD
  * @LastEditors: LeongD
  */
@@ -42,10 +42,16 @@ function App() {
 
       <hr />
 
-      <Menu>
-        <MenuItem>1</MenuItem>
-        <MenuItem>2</MenuItem>
-        <MenuItem>3</MenuItem>
+      <Menu
+        onSelect={(index) => {
+          alert(index);
+        }}
+      >
+        <MenuItem index={0}>1</MenuItem>
+        <MenuItem index={1} disabled>
+          2
+        </MenuItem>
+        <MenuItem index={2}>2</MenuItem>
       </Menu>
     </div>
   );

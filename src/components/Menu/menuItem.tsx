@@ -1,15 +1,15 @@
 /*
  * @Description: This file is made for
  * @Date: 2021-02-14 17:57:52
- * @LastEditTime: 2021-02-14 18:01:20
+ * @LastEditTime: 2021-02-15 20:45:13
  * @Author: LeongD
  * @LastEditors: LeongD
  */
-import React from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
-
+import { MenuContext } from "./menu";
 export interface MenuItemProps {
-  index?: number;
+  index: number;
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;
@@ -17,11 +17,19 @@ export interface MenuItemProps {
 
 const MenuItem: React.FC<MenuItemProps> = (props) => {
   const { index, disabled, className, style, children } = props;
+
+  const context = useContext(MenuContext);
   const classes = classNames("menu-item", className, {
     "is-disabled ": disabled,
+    "is-active": context.index === index,
   });
+
+  const handleClick = () => {
+    if (context.onSelect && !disabled) context.onSelect(index);
+  };
+
   return (
-    <li className={classes} style={style}>
+    <li className={classes} style={style} onClick={handleClick}>
       {children}
     </li>
   );
